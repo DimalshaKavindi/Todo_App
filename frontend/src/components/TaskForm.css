@@ -1,0 +1,24 @@
+.task-form-page {
+    padding: 20px;
+  }
+  
+  .task-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+  }
+  
+  .task-form label {
+    margin-top: 10px;
+  }
+  
+  .task-form input, .task-form textarea {
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .btn {
+    margin-top: 20px;
+  }
+  
