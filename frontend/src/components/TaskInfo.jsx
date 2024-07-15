@@ -4,7 +4,6 @@ import './TaskInfo.css';
 const TaskInfo = () => {
     return (
         <div className='info-container'>
-            <div className='info-header'><h2>Task Info</h2></div>
             <div className='info-form-content'>
                 <form>
                     <div className="mb-3">
@@ -35,7 +34,11 @@ const TaskInfo = () => {
                             <span className="input-group-text"><i className="fa fa-check"></i></span>
                         </div>
                     </div>
+                    <div className='row' style={{alignItems:'center'}}>
+                    <button type="button" className="btn btn-danger update-task-btn" style={{marginRight:'20px'}}>Update Task</button>
                     <button type="button" className="btn btn-danger delete-task-btn">Delete Task</button>
+                    </div>
+                    
                 </form>
             </div>
         </div>
