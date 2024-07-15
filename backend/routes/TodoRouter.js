@@ -1,35 +1,29 @@
 const router = require("express").Router();
 let Task = require("../models/TodoModel");
 
-
-
-router.route("/add").post((req,res)=>{
+router.route("/add").post((req, res) => {
     const title = req.body.title;
     const description = req.body.description;
-    const dueDate = Date(req.body.dueDate);
-    const status = Boolean(req.body.status);
+    const dueDate = req.body.dueDate;
+    const status = req.body.status;
 
     const newTask = new Task({
         title,
         description,
         dueDate,
         status
-    })
-    
-    newTask.save().then(()=>{
-        res.json("Task Added")
-    }).catch((err)=>{
-        console.log(err);
-    })
-})
+    });
 
-router.route("/").get(async(req,res)=>{
-    await Task.find().then((task)=>{
-        res.json(task)
-    }).catch((err)=>{
-        console.log(err);
-    })
-})
+    newTask.save()
+        .then(() => res.json("Task Added"))
+        .catch((err) => console.log(err));
+});
+
+router.route("/").get(async (req, res) => {
+    await Task.find()
+        .then((tasks) => res.json(tasks))
+        .catch((err) => console.log(err));
+});
 
 router.route("/get/:id").get(async (req, res) => {
     let taskId = req.params.id;
@@ -43,7 +37,7 @@ router.route("/get/:id").get(async (req, res) => {
         console.log(err);
         return res.status(500).send({ status: "Error fetching task", error: err.message });
     }
-})
+});
 
 router.route("/update/:id").put(async (req, res) => {
     let taskId = req.params.id;
@@ -66,18 +60,16 @@ router.route("/update/:id").put(async (req, res) => {
         console.log(err);
         return res.status(500).send({ status: "Error updating task", error: err.message });
     }
-})
+});
 
-router.route("/delete/:id").delete(async(req,res)=>{
+router.route("/delete/:id").delete(async (req, res) => {
     let taskId = req.params.id;
     await Task.findByIdAndDelete(taskId)
-    .then(()=>{
-        res.status(200).send({status: "Task Deleted"});
-    }).catch((err) => {
-        console.log(err.message)
-        res.status(500).send({status: "Error with Task Deleted"});
-    })
-})
+        .then(() => res.status(200).send({ status: "Task Deleted" }))
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({ status: "Error with Task Deleted" });
+        });
+});
 
 module.exports = router;
-

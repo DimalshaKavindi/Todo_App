@@ -10,21 +10,23 @@ const TaskForm = () => {
     const [status, setStatus] = useState('todo');
     const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
         const newTask = {
             title,
             description,
             dueDate,
-            status: status === 'completed' // Ensuring status is a boolean value
+            status: status === 'completed'
         };
 
-        try {
-            await axios.post('http://localhost:8080/api/tasks/add', newTask); // Adjust your API endpoint if necessary
-            navigate('/todo_home');
-        } catch (error) {
-            console.error('Error adding task', error);
-        }
+        axios.post('/task/add', newTask)
+            .then(() => {
+                navigate('/todo_home');
+            })
+            .catch(error => {
+                console.log(error);
+            });
     };
 
     return (
@@ -32,42 +34,16 @@ const TaskForm = () => {
             <div className='add-form-content'>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="title"
-                            placeholder="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
+                        <input type="text" className="form-control" id="title" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
                     </div>
                     <div className="mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="description"
-                            placeholder="Description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
+                        <input type="text" className="form-control" id="description" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
                     </div>
                     <div className="mb-3">
-                        <input
-                            type="date"
-                            className="form-control"
-                            id="dueDate"
-                            placeholder="Due Date"
-                            value={dueDate}
-                            onChange={(e) => setDueDate(e.target.value)}
-                        />
+                        <input type="date" className="form-control" id="dueDate" placeholder="Due Date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
                     </div>
                     <div className="mb-3">
-                        <select
-                            className="form-control"
-                            id="status"
-                            value={status}
-                            onChange={(e) => setStatus(e.target.value)}
-                        >
+                        <select className="form-control" id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
                             <option value="todo">To Do</option>
                             <option value="inProgress">In Progress</option>
                             <option value="completed">Completed</option>

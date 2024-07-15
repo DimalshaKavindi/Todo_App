@@ -7,13 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json())
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors())
 
 mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
