@@ -13,11 +13,11 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<SignIn/>} />
-          <Route path='/signup' element={<SignUp/>}/>
-          <Route path='/todo_home' element={<HomePage/>}/>
-          <Route path='/add' element={<TaskForm/>}/>
-          <Route path='/info' element={<TaskInfo/>}/>
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/todo_home" element={<HomePage />} />
+          <Route path="/add" element={<TaskForm />} />
+          <Route path="/info/:id" element={<TaskInfo />} />
         </Routes>
       </div>
     </Router>
