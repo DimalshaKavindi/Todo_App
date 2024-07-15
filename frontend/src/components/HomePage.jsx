@@ -9,12 +9,12 @@ const HomePage = () => {
     return (
         <div className='todo-home' >
             <div className='welcome-text'>
-                <h1>Welcome to ToDo</h1>
+                <h3>Welcome to ToDo</h3>
             </div>
             <div className='todo-content'>
                 <div className='todo-list'>
                     <div className='task-header'>
-                        <h2>Task</h2>
+                        <h1>Tasks</h1>
                         <Link to="/add" className="add-task-link">
                             <button className="add-task-button">
                                 <FaPlus style={{ marginRight: '5px' }} />

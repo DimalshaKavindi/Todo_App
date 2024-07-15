@@ -33,11 +33,8 @@ const SignUp = () => {
                         </span>
                     </div>
                     <button type="submit">Sign Up</button>
-                    
-                        
-                        
 
-                        <Link className='signup-text' to='/todo_home'>  Already have an account? <b>Sign In</b> </Link>
+                        <Link className='signup-text' to='/login'>  Already have an account? <b>Sign In</b> </Link>
       
 
 

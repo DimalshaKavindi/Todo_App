@@ -5,6 +5,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import HomePage from './components/HomePage';
 import TaskForm from './components/TaskForm';
+import TaskInfo from './components/TaskInfo';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/todo_home' element={<HomePage/>}/>
           <Route path='/add' element={<TaskForm/>}/>
+          <Route path='/info' element={<TaskInfo/>}/>
         </Routes>
       </div>
     </Router>
