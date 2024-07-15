@@ -1,25 +1,21 @@
-import React from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import HomePage from './components/HomePage';
+import LandingPage from './components/LandingPage';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import TaskDetailPage from './components/TaskDetailPage';
+import HomePage from './components/HomePage';
 import TaskForm from './components/TaskForm';
-import LandingPage from './components/LandingPage';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div>
         <Routes>
-          <Route path="/" element={<LandingPage/>} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/task/:id" element={<TaskDetailPage />} />
-          <Route path="/add-task" element={<TaskForm />} />
-          <Route path="/edit-task/:id" element={<TaskForm />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<SignIn/>} />
+          <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/todo_home' element={<HomePage/>}/>
+          <Route path='/add' element={<TaskForm/>}/>
         </Routes>
       </div>
     </Router>

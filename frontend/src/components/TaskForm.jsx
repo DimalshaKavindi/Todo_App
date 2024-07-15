@@ -1,74 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
 import './TaskForm.css';
 
 const TaskForm = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [status, setStatus] = useState(false);
-  const { id } = useParams();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (id) {
-      const fetchTask = async () => {
-        try {
-          const response = await axios.get(`/api/tasks/${id}`);
-          const task = response.data.task;
-          setTitle(task.title);
-          setDescription(task.description);
-          setDueDate(new Date(task.dueDate).toISOString().split('T')[0]);
-          setStatus(task.status);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      fetchTask();
-    }
-  }, [id]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const taskData = {
-      title,
-      description,
-      dueDate,
-      status,
-    };
-
-    try {
-      if (id) {
-        await axios.put(`/api/tasks/update/${id}`, taskData);
-      } else {
-        await axios.post('/api/tasks/add', taskData);
-      }
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  return (
-    <div className="task-form">
-      <h1>{id ? 'Edit Task' : 'Add Task'}</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Title</label>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-        <label>Description</label>
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
-        <label>Due Date</label>
-        <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} required />
-        <label>
-          <input type="checkbox" checked={status} onChange={(e) => setStatus(e.target.checked)} />
-          Completed
-        </label>
-        <button type="submit" className="btn">{id ? 'Update' : 'Add'}</button>
-      </form>
-    </div>
-  );
-};
+    return (
+        <div className='add-container'>
+            <div className='header-content'><h2>New Task</h2></div>
+            <div className='add-form-content'>
+                <form>
+                    <div className="mb-3">
+                        <label htmlFor="title" className="form-label">Title</label>
+                        <input type="text" className="form-control" id="title" placeholder="Enter title" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="description" className="form-label">Description</label>
+                        <textarea className="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="dueDate" className="form-label">Due Date</label>
+                        <input type="date" className="form-control" id="dueDate" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="status" className="form-label">Status</label>
+                        <select className="form-select" id="status">
+                            <option value="todo">To Do</option>
+                            <option value="inProgress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <button type="submit" style={{backgroundColor:'green'}} className="btn btn-primary">Create Task</button>
+                </form>
+            </div>
+        </div>
+    );
+}
 
 export default TaskForm;

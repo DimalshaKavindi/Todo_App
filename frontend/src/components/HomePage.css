@@ -1,16 +1,94 @@
-.homepage {
-    padding: 20px;
-  }
-  
-  .task-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .task-item {
-    border: 1px solid #ccc;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.todo-home{
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  height: 100vh; 
+  background-image: url('../../public/images/7.jpg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+
+}
+.welcome-text{
+  display: flex;
+  position: relative;
+  width: 100%; 
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  color: white;
+  font-size: 48px;
+}
+.todo-content{
+  display: flex;
+  position: relative;
+  width: 100%;
+  background-color: white;
+  min-height: calc(100vh - 120px);
+}
+.todo-list{
+  display: flex;
+  position: relative;
+  width: 92%;
+  margin: 4%;
+  border: 1px solid black;
+  border-radius: 20px;
+  flex-direction: column;
+}
+.task-header{
+  display: flex;
+  position: relative;
+  width: 92%;
+  margin: 4%;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+.add-task-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+.add-task-link {
+text-decoration: none; /* Remove underline */
+}
+.add-task-button:hover {
+  background-color: darkgreen;
+}
+.list-content{
+  display: flex;
+  position: relative;
+  width: 92%;
+  height: 40px;
+  margin: 4%;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.list-content{
+  display: flex;
+  position: relative;
+  width: 92%;
+  height: 40px;
+  margin:5px 4%;
+  padding: 10px 20px;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
