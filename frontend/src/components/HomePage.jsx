@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { FaPlus, FaEdit, FaTrashAlt, FaRegClock } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; 
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { FaEdit, FaPlus, FaRegClock, FaTrashAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 const HomePage = () => {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        axios.get('/task')
-            .then(response => {
-                setTasks(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        fetchTasks();
     }, []);
+
+    const fetchTasks = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/tasks');
+            setTasks(response.data);
+        } catch (error) {
+            console.error('Error fetching tasks', error);
+        }
+    };
 
     return (
         <div className='todo-home'>
@@ -33,19 +36,30 @@ const HomePage = () => {
                             </button>
                         </Link>
                     </div>
+
                     <div className='list-content'>
-                        {tasks.map(task => (
-                            <div key={task._id}>
+                        {tasks.map((task) => (
+                            <div key={task._id} className='task-item'>
                                 <div>
-                                    <input className="form-check-input" style={{ marginRight: '10px' }} type="checkbox" id={`checkbox${task._id}`} value={task.status} checked={task.status} />
-                                    <label htmlFor={`checkbox${task._id}`} className="form-label">{task.title}</label>
+                                    <input
+                                        className="form-check-input"
+                                        style={{ marginRight: '10px' }}
+                                        type="checkbox"
+                                        id={`checkbox-${task._id}`}
+                                        value={task.status}
+                                        checked={task.status === 'completed'}
+                                        readOnly
+                                    />
+                                    <label htmlFor={`checkbox-${task._id}`} className="form-label">{task.title}</label>
                                 </div>
                                 <div>
                                     <FaRegClock />
-                                    <label htmlFor={`checkbox${task._id}`} style={{ marginLeft: '10px' }} className="form-label">{new Date(task.dueDate).toLocaleDateString()}</label>
+                                    <label htmlFor={`checkbox-${task._id}`} style={{ marginLeft: '10px' }} className="form-label">
+                                        {new Date(task.dueDate).toLocaleDateString()}
+                                    </label>
                                 </div>
-                                <div className='icons' style={{alignItems:'center'}}>
-                                    <Link to='/info'><FaEdit style={{ color: 'red', marginRight:'15px' }} /></Link>
+                                <div className='icons' style={{ alignItems: 'center' }}>
+                                    <Link to={`/info/${task._id}`}><FaEdit style={{ color: 'red', marginRight: '15px' }} /></Link>
                                     <FaTrashAlt style={{ color: 'red' }} />
                                 </div>
                             </div>
