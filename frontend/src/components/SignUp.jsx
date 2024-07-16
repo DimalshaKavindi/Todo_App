@@ -26,7 +26,7 @@ const SignUp = () => {
                 Password: password
             });
             if (response.data === "User registered successfully") {
-                navigate('/todo_home'); 
+                navigate('/todo_home');
             } else {
                 alert(response.data);
             }
